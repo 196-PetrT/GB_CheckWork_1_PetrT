@@ -1,45 +1,34 @@
 ﻿Console.Clear();
 
-string[] Words = GetArr();
-
+string[] Words = GetArr(10);
+Words = Words.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 Console.WriteLine("Создан массив строк: ");
 PrintArr(Words);
+int InsertNum = InsertNumber();
 
 string[] Words1 = new string[Words.Length];
-GetNewArr(Words1);
+GetNewArr(Words1, InsertNum);
 Words1 = Words1.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 
 Console.WriteLine("Создан новый массив строк по заданной выборке: ");
 PrintArr(Words1);
 
-
-string[] GetArr()
+string[] GetArr(int Length)
 {
     string[] words;
-    int Legth = default;
-    string text;
-    string[] boofer;
+    string text = string.Empty;
+
     Console.WriteLine("Введите новую строку:");
 
-    words = new string[Legth]; 
-
-    do
+    words = new string[Length];
+    for (int i = 0; i < Length - 1; i++)
     {
         text = Console.ReadLine()!;
-
         if (text != "")
-        {
-            Legth++;
-
-            boofer = new string[Legth];
-
-            for (int i = 0; i < boofer.Length - 1; i++)
-                boofer[i] = words[i];
-
-            boofer[Legth - 1] = text;
-            words = boofer;
-        }
-    } while (text != "");
+            words[i] = text;
+        else
+            words[i] = "";
+    }
     return words;
 }
 
@@ -49,11 +38,20 @@ void PrintArr(string[] args)
         Console.WriteLine("args[{0}] = {1}", i, args[i]);
 }
 
-void GetNewArr(string[] args)
+int InsertNumber()
 {
+    int InsertNum = 0;
     Console.WriteLine("Введите требуемый размер для выборки элементов");
-    int InsertNumber = Int32.Parse(Console.ReadLine()!);
 
+    string text = Console.ReadLine()!;
+
+    if (text != "")
+        InsertNum = int.Parse(text);
+    return InsertNum;
+}
+
+void GetNewArr(string[] args, int InsertNumber)
+{
     int size = 0;
     for (int i = 0; i < Words.Length; i++)
     {
