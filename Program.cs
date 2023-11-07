@@ -1,14 +1,13 @@
 ﻿Console.Clear();
 
 string[] Words = GetArr(10);
-Words = Words.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+
 Console.WriteLine("Создан массив строк: ");
 PrintArr(Words);
+
 int InsertNum = InsertNumber();
 
-string[] Words1 = new string[Words.Length];
-GetNewArr(Words1, InsertNum);
-Words1 = Words1.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+string[] Words1 = GetNewArr(Words, InsertNum);
 
 Console.WriteLine("Создан новый массив строк по заданной выборке: ");
 PrintArr(Words1);
@@ -29,6 +28,7 @@ string[] GetArr(int Length)
         else
             words[i] = "";
     }
+    words = words.Where(x => !string.IsNullOrEmpty(x)).ToArray();
     return words;
 }
 
@@ -50,15 +50,18 @@ int InsertNumber()
     return InsertNum;
 }
 
-void GetNewArr(string[] args, int InsertNumber)
+string[] GetNewArr(string[] args, int InsertNumber)
 {
+    string[] words1 = new string[args.Length];
     int size = 0;
-    for (int i = 0; i < Words.Length; i++)
+    for (int i = 0; i < args.Length; i++)
     {
-        if (Words[i].Length < InsertNumber + 1)
+        if (args[i].Length < InsertNumber + 1)
         {
-            args[size] = Words[i];
+            words1[size] = args[i];
             size++;
         }
     }
+    words1 = words1.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+    return words1;
 }
