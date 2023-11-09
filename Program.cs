@@ -20,7 +20,7 @@ string[] GetArr(int Length)
     Console.WriteLine("Введите новую строку:");
 
     words = new string[Length];
-    for (int i = 0; i < Length - 1; i++)
+    for (int i = 0; i < Length; i++)
     {
         text = Console.ReadLine()!;
         if (text != "")
